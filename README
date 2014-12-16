@@ -1,0 +1,11 @@
+BiggerTrak
+
+This is the source code that is used for my PiWars 2014 entry 'BiggerTrak'.
+BiggerTrak was based around a Wild Thumper 6WD Chassis with the TRex Motor Controller
+(Arduino based) connected to a Raspberry Pi Model A+ via I2C.
+
+Remote control of the robot was done via a Sony PlayStation DualShock controller, connected via BlueTooth 
+to the Raspberry Pi.
+
+Automated control of the robot was started, but currently it doesn't reliably drive in a straight line and still needs work.
+
