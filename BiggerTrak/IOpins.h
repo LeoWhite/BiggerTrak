@@ -1,11 +1,11 @@
 
 //------------------------- Define function of each I/O pin -------------------------------------------------
 
-#define lmencpin     6  //  D6 - left  motor encoder input - optional
-#define rmencpin     5  //  D5 - right motor encoder input - optional
+#define lmencpin     6  //  D6 - left  motor encoder input
+#define lmenc_secondpin     8  // D8 - left  motor encoder second pin
 
-#define lmenc_secondpin     13  //  D6 - left  motor encoder input - optional
-#define rmenc_secondpin     12  //  D5 - right motor encoder input - optional
+#define rmencpin     5  //  D5 - right motor encoder input
+#define rmenc_secondpin     7  //  D7 - right motor encoder second pin
 
 
 #define lmbrkpin     4  //  D4 - left  motor brake        control    pin    HIGH = Brake 
@@ -24,21 +24,9 @@
 #define axisypin     1  //  A1 - accelerometer Y-axis
 #define axiszpin     2  //  A2 - accelerometer Z-axis
 
-//------------------------- Servo Support -------------------------------------------------------------------
-// Servos are defined as required so that the digital pins may be used for other functions
-// The sample code defines servo positions using the writeMicrosecond() command for greater precision 1500=center
-// A servo position of 0 indicates that a servo is not used and the pin is free for other purposes
-// When required - servos 0-5 use I/O pins D7, D8, D12, D13, D5, D6
-// Servo headers for D7, D8, D12, D13 are powered from +6V or +Bat when in low voltage mode.
-// Servo headers for D5 and D6 are powered from +5V and are best suited for use with low power servos e.g. pan and tilt
 
-//------------------------- alternate definitions for RC mode -----------------------------------------------
-
-#define RCsteerpin   6  //  D6 - RC steering input        only valid in mode 1
-#define RCspeedpin   5  //  D5 - RC throttle input        only valid in mode 1
-
-#define RearLightPin 7 // Read NeoPixel light
+#define RearLightPin 13 // D13 - Read NeoPixel light
 
 #define ServoMax 1
-#define ServoOnePin 8 // Front mounted Servo
+#define ServoOnePin 12 // D12 - Front mounted Servo - Optional
 
