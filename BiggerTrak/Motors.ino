@@ -87,12 +87,12 @@ void Motors(int left, int right)
   */
 
   // Store the percentage values
-  leftMotorPower = left;
-  rightMotorPower = right;
+  motors[LEFT_MOTOR].power = left;
+  motors[RIGHT_MOTOR].power = right;
   
   // Convert from percentage to actual value
-  lmspeed = (abs(leftMotorPower) * 0xFF) / 100;
-  rmspeed = (abs(rightMotorPower) * 0xFF) /100;
+  lmspeed = (abs(motors[LEFT_MOTOR].power) * 0xFF) / 100;
+  rmspeed = (abs(motors[RIGHT_MOTOR].power) * 0xFF) /100;
   
   // Convert to take into account the difference between
   // the input voltage and the target output voltage
@@ -100,24 +100,27 @@ void Motors(int left, int right)
   rmspeed = (rmspeed * powerRatio) / 100;
   
   digitalWrite(lmbrkpin,motors[LEFT_MOTOR].brake);                     // if left brake>0 then engage electronic braking for left motor
-  digitalWrite(lmdirpin,leftMotorPower > 0);                     // if left speed>0 then left motor direction is forward else reverse
+  digitalWrite(lmdirpin,motors[LEFT_MOTOR].power > 0);                     // if left speed>0 then left motor direction is forward else reverse
   analogWrite (lmpwmpin,lmspeed);                  // set left PWM to absolute value of left speed - if brake is engaged then PWM controls braking
-  if(motors[LEFT_MOTOR].brake>0 && lmspeed==0) motors[LEFT_MOTOR].encoderCount=0;                  // if left brake is enabled and left speed=0 then reset left encoder counter
+  if(motors[LEFT_MOTOR].brake>0 && motors[LEFT_MOTOR].power==0) {
+    motors[LEFT_MOTOR].encoderCount=0;                  // if left brake is enabled and left speed=0 then reset left encoder counter
+  }
   
   digitalWrite(rmbrkpin,motors[RIGHT_MOTOR].brake);                     // if right brake>0 then engage electronic braking for right motor#
-  digitalWrite(rmdirpin,rightMotorPower > 0);                     // if right speed>0 then right motor direction is forward else reverse
+  digitalWrite(rmdirpin,motors[RIGHT_MOTOR].power > 0);                     // if right speed>0 then right motor direction is forward else reverse
   analogWrite (rmpwmpin,rmspeed);                  // set right PWM to absolute value of right speed - if brake is engaged then PWM controls braking
-  if(motors[RIGHT_MOTOR].brake>0 && rmspeed==0) motors[RIGHT_MOTOR].encoderCount=0;                  // if right brake is enabled and right speed=0 then reset right encoder counter
-  
+  if(motors[RIGHT_MOTOR].brake>0 && motors[RIGHT_MOTOR].power==0) {
+    motors[RIGHT_MOTOR].encoderCount=0;                  // if right brake is enabled and right speed=0 then reset right encoder counter
+  }
   
   // Update the LEDS
   rearLightUpdate();
   
 
 Serial.print("Motors =");
-  Serial.print(leftMotorPower);
+  Serial.print(motors[LEFT_MOTOR].power);
   Serial.print(":");
-  Serial.println(rightMotorPower);
+  Serial.println(motors[RIGHT_MOTOR].power);
   
 }
 
@@ -158,7 +161,7 @@ int motorsI2CSet(byte *i2cArgs, uint8_t *pi2cResponse) {
   left=i2cArgs[0]*256+i2cArgs[1];                                               
   if(left >= -100 && left <= 100)
   { 
-    lmbrake=false;
+    motors[LEFT_MOTOR].brake=false;
     gotLeft = true;
   }
 
@@ -166,7 +169,7 @@ int motorsI2CSet(byte *i2cArgs, uint8_t *pi2cResponse) {
   right=i2cArgs[2]*256+i2cArgs[3];
   if(right >= -100 && right <= 100)
   {
-    rmbrake=false;
+    motors[RIGHT_MOTOR].brake=false;
     gotRight = true;
   }
 

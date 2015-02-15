@@ -13,8 +13,6 @@ typedef struct Motor {
 Motor motors[2] = {};
 
 // define global variables here
-int leftMotorPower = 0, rightMotorPower = 0;           // left and right motor power leves in percentage (-100 to 100)
-
 unsigned long lastoverload = 0;                            // Time we last overloaded
 int overloadtime = 100;
 

@@ -32,12 +32,12 @@ void rearLightUpdate() {
     uint32_t colour0, colour1, colour2, colour3;
     
     if(i == 0) {
-      power = abs(leftMotorPower);
-      direction = leftMotorPower >= 0;
+      power = abs(motors[LEFT_MOTOR].power);
+      direction = motors[LEFT_MOTOR].power >= 0;
     }
     else {
-      power = abs(rightMotorPower);
-      direction = rightMotorPower >= 0;
+      power = abs(motors[RIGHT_MOTOR].power);
+      direction = motors[RIGHT_MOTOR].power >= 0;
     }
     
     if(power == 100) {
