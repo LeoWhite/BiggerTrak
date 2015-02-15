@@ -256,12 +256,12 @@ try:
               PowerLimiter = 100;
             # Increase the power limit
             elif event.button == PS3_DPAD_UP:
-              PowerLimiter += 10;
+              PowerLimiter += 5;
               if PowerLimiter > 100:
                 PowerLimiter = 100;
             # Increase the power limit
             elif event.button == PS3_DPAD_DOWN:
-              PowerLimiter -= 10;
+              PowerLimiter -= 5;
               if PowerLimiter < POWER_LIMITER_DEFAULT:
                 PowerLimiter = POWER_LIMITER_DEFAULT;
                 
