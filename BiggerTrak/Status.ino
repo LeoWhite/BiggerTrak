@@ -1,7 +1,3 @@
-int volts;                                             // battery voltage*10 (accurate to 1 decimal place)
-int xaxis,yaxis,zaxis;                                 // X, Y, Z accelerometer readings
-int deltx,delty,deltz;                                 // X, Y, Z impact readings 
-
 /**
  * Returns the current state of the system.
  *
@@ -12,6 +8,10 @@ int deltx,delty,deltz;                                 // X, Y, Z impact reading
  */
 int getStatus(byte *i2cArgs, uint8_t *pi2cResponse) {
   int i2cResponseArg = 0;
+  int volts;                                             // battery voltage*10 (accurate to 1 decimal place)
+  int xaxis,yaxis,zaxis;                                 // X, Y, Z accelerometer readings
+  int deltx,delty,deltz;                                 // X, Y, Z impact readings 
+
   
   volts=analogRead(voltspin)*10/3.357; 
 

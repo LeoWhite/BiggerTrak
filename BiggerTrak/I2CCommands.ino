@@ -1,6 +1,5 @@
 #include <Wire.h>
 
-
 // List of the supported I2C commands
 enum { 
   I2C_CMD_GET_STATE = 0xF,

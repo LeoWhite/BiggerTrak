@@ -54,7 +54,7 @@ void Motors(int left, int right)
   int lmspeed,rmspeed;
   
   // Are we in an 'overload' state?
-  if((millis() - lastoverload) < OVERLOAD_COOLDOWN_MS) {
+  if((millis() - lastOverloadMS) < OVERLOAD_COOLDOWN_MS) {
     // Set speed to zero and brakes to on
     lmspeed = 0;
     motors[LEFT_MOTOR].brake=true;

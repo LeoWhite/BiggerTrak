@@ -1,4 +1,5 @@
-// Code for controlling the robot
+// Code for controlling the robot autonomously
+// Note: Not finished, needs work!
 int targetDistance = 0;
 int distanceTravelled = 0;
 int powerLeft = 0, powerRight = 0;

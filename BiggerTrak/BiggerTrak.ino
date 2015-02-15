@@ -2,18 +2,20 @@
 #include <avr/wdt.h>
 
 
-
+// Define a structure to hold information about the motors
 typedef struct Motor {
-  int power;
-  boolean brake;
-  int current;
-  volatile int encoderCount;
+  int power; // Current power level of the motor from -100 to 100
+  boolean brake; // If true then enable the electric brake
+  int current;   // Current being pulled by the motor in milli-amps
+  volatile int encoderCount; // How far this motor has turned since the count was last reset
 };
 
-Motor motors[2] = {};
 
-// define global variables here
-unsigned long lastoverload = 0;                            // Time we last overloaded
+// Array to hold details on the 2 motors this system has
+Motor motors[2];
+
+// Time we last detected an overloaded
+unsigned long lastOverloadMS = 0; 
 
 /**
  * Sets up the Arduino ready for use
@@ -23,7 +25,8 @@ void setup() {
   MCUSR=0;
   wdt_disable();
   
-  Serial.begin(115200);         // start serial for output
+  // start serial for output (Used for debugging)
+  Serial.begin(115200);    
 
   // Configure motor
   motorsSetup();
@@ -58,7 +61,7 @@ void loop() {
   if(motors[LEFT_MOTOR].current >= CURRENT_OVERLOAD_CUTOUT || motors[RIGHT_MOTOR].current >= CURRENT_OVERLOAD_CUTOUT) {
     // Mark the fact that we have overloaded and trigger
     // an update of the Motors, this will cause them to stop
-    lastoverload = millis();
+    lastOverloadMS = millis();
     Motors(0, 0);    
   }
   
