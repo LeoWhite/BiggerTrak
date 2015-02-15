@@ -47,6 +47,10 @@ PS3_AXIS_PLAYSTATION = 16
 # The I2C address of the arduino
 I2CAddress = 0x07
 
+# The default power limit for the motors as a percentage. 
+# This helps keep the chassis controllable by limiting its max speed
+POWER_LIMITER_DEFAULT = 75
+
 # Initialise the pygame library, ready for use
 pygame.init()
 
@@ -188,7 +192,7 @@ print 'Initialized Joystick : %s' % j.get_name()
 
 LeftTrack = 0
 RightTrack = 0
-PowerLimiter = 60
+PowerLimiter = POWER_LIMITER_DEFAULT
 ServoPosition = 2500
 
 # Configure wiring pi  
@@ -246,7 +250,7 @@ try:
                 UpdateServo = 1
             # Change the power limit to its default
             elif event.button == PS3_DPAD_LEFT:
-              PowerLimiter = 60;
+              PowerLimiter = POWER_LIMITER_DEFAULT;
             # Change the power limit to its max
             elif event.button == PS3_DPAD_RIGHT:
               PowerLimiter = 100;
@@ -258,8 +262,8 @@ try:
             # Increase the power limit
             elif event.button == PS3_DPAD_DOWN:
               PowerLimiter -= 10;
-              if PowerLimiter < 60:
-                PowerLimiter = 60;
+              if PowerLimiter < POWER_LIMITER_DEFAULT:
+                PowerLimiter = POWER_LIMITER_DEFAULT;
                 
           if UpdateMotors:
             #print 'LeftTrack %f' % LeftTrack
