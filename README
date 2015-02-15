@@ -1,11 +1,53 @@
 BiggerTrak
+==========
 
 This is the source code that is used for my PiWars 2014 entry 'BiggerTrak'.
 BiggerTrak was based around a Wild Thumper 6WD Chassis with the TRex Motor Controller
 (Arduino based) connected to a Raspberry Pi Model A+ via I2C.
 
-Remote control of the robot was done via a Sony PlayStation DualShock controller, connected via BlueTooth 
+Remote control of the robot was done via a Sony PlayStation 3 DualShock controller, connected via BlueTooth 
 to the Raspberry Pi.
 
 Automated control of the robot was started, but currently it doesn't reliably drive in a straight line and still needs work.
+
+Installation
+============
+
+Arduino
+=======
+
+ The 'BiggerTrak' Arduino program makes use of the AdaFruit NeopPixel library (https://github.com/adafruit/Adafruit_NeoPixel)
+ and the PinChangeInt library (http://code.google.com/p/arduino-pinchangeint/). Once these libraries are installed the BiggerTrak 
+ code can be compiled and uploaded to the Arduino on the TRex controller
+ 
+ Note: This code makes use of the Arduino watchdog, which on the pre-supplied boot loader doesn't
+       work correctly and cause the Ardunio to fail to soft reset.
+       I resolved this issue by switching over to the Optiboot bootloader (https://code.google.com/p/optiboot/)
+       
+
+RaspberryPi
+===========
+ 
+ (Incomplete - Pre-requisits pygame (pre-installed), wiringpi 2 (https://github.com/Gadgetoid/WiringPi2-Python), bluetooth/sixad (Article in The MagPi magazine http://www.themagpi.com/issue/issue-27/))
+ 
+ The RaspberryPi side of things is controlled using the 'BiggerTrak.py' python script which should be launched using 'sudo python BiggerTrak.py'
+ 
+ 
+Controls
+========
+
+ Left Stick - Left motors
+ Right Stick - Right motors
+ 
+ Left - Set power limiter to default (75%)
+ Right - Set power limiter to 100%
+ Up - Increase power limiter by 5 (Max 100%)
+ Down - Decrease power limited by 5 (Minimum default value)
+
+ R1 - Increase position of servo (If fitted)
+ R2 - Decrease position of servo (If fitted)
+ 
+
+  
+
 
