@@ -15,9 +15,6 @@ Motor motors[2] = {};
 // define global variables here
 int leftMotorPower = 0, rightMotorPower = 0;           // left and right motor power leves in percentage (-100 to 100)
 boolean lmbrake = false, rmbrake = false;              // left and right brakes - non zero values enable brake
-int lmcur,rmcur;                                       // left and right motor current
-
-int lmcurmax = 20000;                                   // Max current that can be pulled from the batteries before we cut the power
 
 unsigned long lastoverload = 0;                            // Time we last overloaded
 int overloadtime = 100;
@@ -62,7 +59,7 @@ void loop() {
   motors[RIGHT_MOTOR].current=(analogRead(rmcurpin)-511)*48.83;  
   
   // Check if we've gone over the limit
-  if(motors[LEFT_MOTOR].current >= lmcurmax || motors[RIGHT_MOTOR].current >= lmcurmax) {
+  if(motors[LEFT_MOTOR].current >= CURRENT_OVERLOAD_CUTOUT || motors[RIGHT_MOTOR].current >= CURRENT_OVERLOAD_CUTOUT) {
     // Mark the fact that we have overloaded and trigger
     // an update of the Motors, this will cause them to stop
     lastoverload = millis();

@@ -24,14 +24,14 @@ int getStatus(byte *i2cArgs, uint8_t *pi2cResponse) {
     
   pi2cResponse[i2cResponseArg++] = highByte(volts);                   // battery voltage      high byte
   pi2cResponse[i2cResponseArg++] = lowByte(volts);                   // battery voltage      low  byte
-  pi2cResponse[i2cResponseArg++] = highByte(lmcur);                   // left  motor current  high byte
-  pi2cResponse[i2cResponseArg++] = lowByte(lmcur);                   // left  motor current  low  byte
+  pi2cResponse[i2cResponseArg++] = highByte(motors[LEFT_MOTOR].current);                   // left  motor current  high byte
+  pi2cResponse[i2cResponseArg++] = lowByte(motors[LEFT_MOTOR].current);                   // left  motor current  low  byte
   
   pi2cResponse[i2cResponseArg++] = highByte(motors[LEFT_MOTOR].encoderCount);                   // left  motor encoder  high byte 
   pi2cResponse[i2cResponseArg++] = lowByte(motors[LEFT_MOTOR].encoderCount);                   // left  motor encoder  low  byte 
 
-  pi2cResponse[i2cResponseArg++]=highByte(rmcur);                   // right motor current  high byte
-  pi2cResponse[i2cResponseArg++]= lowByte(rmcur);                   // right motor current  low  byte
+  pi2cResponse[i2cResponseArg++]=highByte(motors[RIGHT_MOTOR].current);                   // right motor current  high byte
+  pi2cResponse[i2cResponseArg++]= lowByte(motors[RIGHT_MOTOR].current);                   // right motor current  low  byte
   
   pi2cResponse[i2cResponseArg++]=highByte(motors[RIGHT_MOTOR].encoderCount);                  // right motor encoder  high byte 
   pi2cResponse[i2cResponseArg++]= lowByte(motors[RIGHT_MOTOR].encoderCount);                  // right motor encoder  low  byte 
