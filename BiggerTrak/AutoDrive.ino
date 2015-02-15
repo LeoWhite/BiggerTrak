@@ -44,8 +44,8 @@ void driveForwards(int distance, int power) {
   // Start driving
   autoDriveActive = true;
   autoDriveLastChecked = millis();
-  lmbrake=false;
-  rmbrake=false;
+  motors[LEFT_MOTOR].brake=false;
+  motors[RIGHT_MOTOR].brake=false;
   powerLeft = power;
   powerRight = power;
   Motors(powerLeft, powerRight);
@@ -77,8 +77,8 @@ void driveRotate(int degreesToTurn) {
   oldrmEnc = motors[RIGHT_MOTOR].encoderCount;
   autoDriveActive = true;
   autoDriveLastChecked = millis();
-  lmbrake=false;
-  rmbrake=false;
+  motors[LEFT_MOTOR].brake=false;
+  motors[RIGHT_MOTOR].brake=false;
   
   Motors(left, right);    
 }

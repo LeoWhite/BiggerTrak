@@ -57,9 +57,9 @@ void Motors(int left, int right)
   if((millis() - lastoverload) < OVERLOAD_COOLDOWN_MS) {
     // Set speed to zero and brakes to on
     lmspeed = 0;
-    lmbrake=true;
+    motors[LEFT_MOTOR].brake=true;
     rmspeed = 0;
-    rmbrake=true;
+    motors[RIGHT_MOTOR].brake=true;
   }  
   
   // Are the inputs valid
@@ -99,15 +99,15 @@ void Motors(int left, int right)
   lmspeed = (lmspeed * powerRatio) / 100;
   rmspeed = (rmspeed * powerRatio) / 100;
   
-  digitalWrite(lmbrkpin,lmbrake);                     // if left brake>0 then engage electronic braking for left motor
+  digitalWrite(lmbrkpin,motors[LEFT_MOTOR].brake);                     // if left brake>0 then engage electronic braking for left motor
   digitalWrite(lmdirpin,leftMotorPower > 0);                     // if left speed>0 then left motor direction is forward else reverse
   analogWrite (lmpwmpin,lmspeed);                  // set left PWM to absolute value of left speed - if brake is engaged then PWM controls braking
-  if(lmbrake>0 && lmspeed==0) motors[LEFT_MOTOR].encoderCount=0;                  // if left brake is enabled and left speed=0 then reset left encoder counter
+  if(motors[LEFT_MOTOR].brake>0 && lmspeed==0) motors[LEFT_MOTOR].encoderCount=0;                  // if left brake is enabled and left speed=0 then reset left encoder counter
   
-  digitalWrite(rmbrkpin,rmbrake);                     // if right brake>0 then engage electronic braking for right motor#
+  digitalWrite(rmbrkpin,motors[RIGHT_MOTOR].brake);                     // if right brake>0 then engage electronic braking for right motor#
   digitalWrite(rmdirpin,rightMotorPower > 0);                     // if right speed>0 then right motor direction is forward else reverse
   analogWrite (rmpwmpin,rmspeed);                  // set right PWM to absolute value of right speed - if brake is engaged then PWM controls braking
-  if(rmbrake>0 && rmspeed==0) motors[RIGHT_MOTOR].encoderCount=0;                  // if right brake is enabled and right speed=0 then reset right encoder counter
+  if(motors[RIGHT_MOTOR].brake>0 && rmspeed==0) motors[RIGHT_MOTOR].encoderCount=0;                  // if right brake is enabled and right speed=0 then reset right encoder counter
   
   
   // Update the LEDS
@@ -126,8 +126,8 @@ Serial.print("Motors =");
  */
 void MotorsStop() {
   // Enable brakes
-  lmbrake=true;
-  rmbrake=true;
+  motors[LEFT_MOTOR].brake=true;
+  motors[RIGHT_MOTOR].brake=true;
   
   // Stopping the motors also cancels auto drive
   stopAutoDrive();
