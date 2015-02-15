@@ -27,44 +27,45 @@ void rearLightUpdate() {
   for(uint8_t i = 0; i < 2; i++)
   {
     uint8_t LED0 = 0, LED1 = 0, LED2 = 0, LED3 = 0;
-    uint8_t power = 0, dir = 0;
+    uint8_t power = 0;
+    boolean direction = 0;
     uint32_t colour0, colour1, colour2, colour3;
     
     if(i == 0) {
-      power = (abs(leftMotorPower) * 0xFF) / 100;
-      dir = leftMotorPower >= 0;
+      power = abs(leftMotorPower);
+      direction = leftMotorPower >= 0;
     }
     else {
-      power = (abs(rightMotorPower) * 0xFF) / 100;
-      dir = rightMotorPower >= 0;
+      power = abs(rightMotorPower);
+      direction = rightMotorPower >= 0;
     }
     
-    if(power == 0xFF) {
+    if(power == 100) {
       LED0 = 0xFF;
       LED1 = 0xFF;
       LED2 = 0xFF;
       LED3 = 0xFF;
     }
-    else if(power > 0xBF) {
+    else if(power >= 75) {
       LED0 = 0xFF;
       LED1 = 0xFF;
       LED2 = 0xFF;
-      LED3 = (power - 0xBF);
+      LED3 = ((power - 75) * 0xFF) / 100;
     }
-    else if(power > 0x7F) {
+    else if(power >= 50) {
       LED0 = 0xFF;
       LED1 = 0xFF;
-      LED2 = (power - 0x7F);
+      LED2 = ((power - 50) * 0xFF) / 100;
     }
-    else if(power > 0x3F) {
+    else if(power >= 25) {
       LED0 = 0xFF;
-      LED1 = (power - 0x3F);
+      LED1 = ((power - 25) * 0xFF) / 100;
     }
     else {
-      LED0 = (power & 0x3F);
+      LED0 = (power * 0xFF) / 100;
     }
     
-    if(dir == true) {  
+    if(direction == true) {  
       colour0 = rearNeoStrip.Color(LED0, LED0, LED0);
       colour1 = rearNeoStrip.Color(LED1, LED1, LED1);
       colour2 = rearNeoStrip.Color(LED2, LED2, LED2);

@@ -10,7 +10,7 @@ int leftMotorPower = 0, rightMotorPower = 0;           // left and right motor p
 boolean lmbrake = false,rmbrake = false;                                  // left and right brakes - non zero values enable brake
 int lmcur,rmcur;                                       // left and right motor current
 
-int lmcurmax = 8000;                                   // Max current that can be pulled from the batteries before we stop
+int lmcurmax = 20000;                                   // Max current that can be pulled from the batteries before we cut the power
 
 unsigned long lastoverload = 0;                            // Time we last overloaded
 int overloadtime = 100;
@@ -43,7 +43,7 @@ void setup() {
   rearLightSetup();
   
   // With setup complete we now enable the watchdog
-  wdt_enable(WDTO_500MS);
+  wdt_enable(WDTO_250MS);
   
   Serial.println("Setup complete");
 }
@@ -64,7 +64,7 @@ void loop() {
     Motors(0, 0);    
   }
   
-  // Check if there are any pendign i2c commands to process
+  // Check if there are any pending i2c commands to process
   I2C_CheckCommands();
     
   // Update any auto drive
@@ -73,6 +73,4 @@ void loop() {
   // Reset the watchdog to stop it triggering
   wdt_reset();
 }
-
-
 
