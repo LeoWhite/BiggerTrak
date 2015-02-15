@@ -31,14 +31,15 @@ void driveForwards(int distance, int power) {
   
   // Call 'stop' to make sure we are stationary and to reset the encoders
   MotorsStop();
-  lmenc = rmenc = 0;
+  motors[LEFT_MOTOR].encoderCount = 0;
+  motors[RIGHT_MOTOR].encoderCount = 0;
   
   // Configure the target distance and reset
   // the current count
   targetDistance = distance;
   distanceTravelled = 0;
-  oldlmEnc = lmenc;
-  oldrmEnc = rmenc;
+  oldlmEnc = motors[LEFT_MOTOR].encoderCount;
+  oldrmEnc = motors[RIGHT_MOTOR].encoderCount;
   
   // Start driving
   autoDriveActive = true;
@@ -72,8 +73,8 @@ void driveRotate(int degreesToTurn) {
   
   targetDistance = int(abs(countsPerDegree) * degreesToTurn);
   distanceTravelled = 0;
-  oldlmEnc = lmenc;
-  oldrmEnc = rmenc;
+  oldlmEnc = motors[LEFT_MOTOR].encoderCount;
+  oldrmEnc = motors[RIGHT_MOTOR].encoderCount;
   autoDriveActive = true;
   autoDriveLastChecked = millis();
   lmbrake=false;
@@ -89,7 +90,7 @@ void driveRotate(int degreesToTurn) {
 void performAutoDrive() {
   // Cache and reset the encoder values immediately
   // as they could change throughout this function.
-  int cachedLMEnc = lmenc, cachedRMEnc = rmenc;
+  int cachedLMEnc = motors[LEFT_MOTOR].encoderCount, cachedRMEnc = motors[RIGHT_MOTOR].encoderCount;
   
   // Anything to do?
   if(false == autoDriveActive) {
@@ -121,8 +122,9 @@ else if(powerRight < 0) {
 }
 
     // Update the distance travelled and reset the encoder count
-    distanceTravelled += lmenc;
-    lmenc = rmenc = 0;
+    distanceTravelled += motors[LEFT_MOTOR].encoderCount;
+    motors[LEFT_MOTOR].encoderCount = 0;
+    motors[RIGHT_MOTOR].encoderCount = 0;
 
     Serial.print("Adjusting for drift ");
     Serial.print((cachedLMEnc - cachedRMEnc));

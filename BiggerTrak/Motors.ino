@@ -26,6 +26,9 @@ void motorsSetup() {
   pinMode(rmdirpin,OUTPUT);
   pinMode(rmbrkpin,OUTPUT);
   
+  // Initialise the motor arrays
+  memset(motors, 0, sizeof(motors));
+  
   // Work out how much power we should be applying to the
   // motors to reach the target voltage
   batteryVoltage = analogRead(voltspin)*10/3.357; 
@@ -99,12 +102,12 @@ void Motors(int left, int right)
   digitalWrite(lmbrkpin,lmbrake);                     // if left brake>0 then engage electronic braking for left motor
   digitalWrite(lmdirpin,leftMotorPower > 0);                     // if left speed>0 then left motor direction is forward else reverse
   analogWrite (lmpwmpin,lmspeed);                  // set left PWM to absolute value of left speed - if brake is engaged then PWM controls braking
-  if(lmbrake>0 && lmspeed==0) lmenc=0;                  // if left brake is enabled and left speed=0 then reset left encoder counter
+  if(lmbrake>0 && lmspeed==0) motors[LEFT_MOTOR].encoderCount=0;                  // if left brake is enabled and left speed=0 then reset left encoder counter
   
   digitalWrite(rmbrkpin,rmbrake);                     // if right brake>0 then engage electronic braking for right motor#
   digitalWrite(rmdirpin,rightMotorPower > 0);                     // if right speed>0 then right motor direction is forward else reverse
   analogWrite (rmpwmpin,rmspeed);                  // set right PWM to absolute value of right speed - if brake is engaged then PWM controls braking
-  if(rmbrake>0 && rmspeed==0) rmenc=0;                  // if right brake is enabled and right speed=0 then reset right encoder counter
+  if(rmbrake>0 && rmspeed==0) motors[RIGHT_MOTOR].encoderCount=0;                  // if right brake is enabled and right speed=0 then reset right encoder counter
   
   
   // Update the LEDS

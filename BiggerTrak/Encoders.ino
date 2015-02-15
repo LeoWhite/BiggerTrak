@@ -35,7 +35,7 @@ void encodersSetup() {
  * are not disabled for too long
  */
 void leftEncoder() {
-  lmenc++;
+  motors[LEFT_MOTOR].encoderCount++;
 }
 
 /**
@@ -44,5 +44,5 @@ void leftEncoder() {
  * are not disabled for too long
  */
 void rightEncoder() {
-  rmenc++;
+  motors[RIGHT_MOTOR].encoderCount++;
 }

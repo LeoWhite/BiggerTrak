@@ -27,14 +27,14 @@ int getStatus(byte *i2cArgs, uint8_t *pi2cResponse) {
   pi2cResponse[i2cResponseArg++] = highByte(lmcur);                   // left  motor current  high byte
   pi2cResponse[i2cResponseArg++] = lowByte(lmcur);                   // left  motor current  low  byte
   
-  pi2cResponse[i2cResponseArg++] = highByte(lmenc);                   // left  motor encoder  high byte 
-  pi2cResponse[i2cResponseArg++] = lowByte(lmenc);                   // left  motor encoder  low  byte 
+  pi2cResponse[i2cResponseArg++] = highByte(motors[LEFT_MOTOR].encoderCount);                   // left  motor encoder  high byte 
+  pi2cResponse[i2cResponseArg++] = lowByte(motors[LEFT_MOTOR].encoderCount);                   // left  motor encoder  low  byte 
 
   pi2cResponse[i2cResponseArg++]=highByte(rmcur);                   // right motor current  high byte
   pi2cResponse[i2cResponseArg++]= lowByte(rmcur);                   // right motor current  low  byte
   
-  pi2cResponse[i2cResponseArg++]=highByte(rmenc);                  // right motor encoder  high byte 
-  pi2cResponse[i2cResponseArg++]= lowByte(rmenc);                  // right motor encoder  low  byte 
+  pi2cResponse[i2cResponseArg++]=highByte(motors[RIGHT_MOTOR].encoderCount);                  // right motor encoder  high byte 
+  pi2cResponse[i2cResponseArg++]= lowByte(motors[RIGHT_MOTOR].encoderCount);                  // right motor encoder  low  byte 
   
   pi2cResponse[i2cResponseArg++]=highByte(xaxis);                  // accelerometer X-axis high byte
   pi2cResponse[i2cResponseArg++]= lowByte(xaxis);                  // accelerometer X-axis low  byte

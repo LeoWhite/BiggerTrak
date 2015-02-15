@@ -1,6 +1,9 @@
 
 //------------------------- Define function of each I/O pin -------------------------------------------------
 
+#define LEFT_MOTOR 0
+#define RIGHT_MOTOR 1
+
 #define lmencpin     6  //  D6 - left  motor encoder input
 #define lmenc_secondpin     8  // D8 - left  motor encoder second pin
 
