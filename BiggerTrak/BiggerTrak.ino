@@ -1,4 +1,4 @@
-#include "IOpins.h"
+#include "BiggerTrak.h"
 #include <avr/wdt.h>
 
 
@@ -14,7 +14,6 @@ Motor motors[2] = {};
 
 // define global variables here
 unsigned long lastoverload = 0;                            // Time we last overloaded
-int overloadtime = 100;
 
 /**
  * Sets up the Arduino ready for use

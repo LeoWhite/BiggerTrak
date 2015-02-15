@@ -35,3 +35,10 @@
 #define ServoMax 1
 #define ServoOnePin 12 // D12 - Front mounted Servo - Optional
 
+typedef struct Motor {
+  int power;
+  boolean brake;
+  int current;
+  volatile int encoderCount;
+};
+
