@@ -6,7 +6,7 @@
 
 // define global variables here
 int  lowbat=550;                                       // default low battery voltage is 5.5V
-int lmspeed,rmspeed;                                   // left and right motor speeds -255 to +255
+int leftMotorPower = 0, rightMotorPower = 0;           // left and right motor power leves in percentage (-100 to 100)
 boolean lmbrake = false,rmbrake = false;                                  // left and right brakes - non zero values enable brake
 int lmcur,rmcur;                                       // left and right motor current
 
